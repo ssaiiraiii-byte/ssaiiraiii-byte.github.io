@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -14,6 +13,10 @@
             font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #f5f7fa;
             color: #333;
@@ -262,6 +265,11 @@
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
         }
         
+        /* 优化：首页无侧边栏时，内容区占满 */
+        .main-content.no-sidebar .content-display {
+            flex-basis: 100%;
+        }
+
         .content-panel {
             display: none;
         }
@@ -478,6 +486,7 @@
             color: #ddd;
             text-decoration: none;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .footer-links a:hover {
@@ -563,7 +572,7 @@
 
         <nav class="navbar">
             <ul class="nav-list">
-                <li class="nav-item"><a href="#" class="nav-link" data-target="sidebar-home">首页</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" data-target="content-home">首页</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-target="sidebar-about">关于我们</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-target="sidebar-products">核心产品</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-target="sidebar-cases">业绩与案例</a></li>
@@ -576,22 +585,15 @@
     <div class="banner">
         <h1 class="banner-title">致力于泛半导体湿电子化学品高端智能装备系统解决方案</h1>
         <p class="banner-subtitle">集研发、设计、生产、测试、安装于一体，提供高纯工艺机台、核心装备与厂务供应系统</p>
-        <button class="custom-btn">立即咨询</button>
+        <button class="custom-btn" id="consult-btn">立即咨询</button>
     </div>
 
     <div class="breadcrumb">
-        <span>当前位置: <a href="#">首页</a> &gt; <span id="breadcrumb-l1"></span> &gt; <span id="breadcrumb-l2"></span></span>
+        <span>当前位置: <a href="#">首页</a><span id="breadcrumb-path"></span></span>
     </div>
 
     <div class="main-content">
-        <div id="sidebar-home" class="sidebar">
-            <h2 class="sidebar-title">网站导航</h2>
-            <ul class="category-list">
-                <li class="category-item"><a href="#" class="category-link" data-target="content-welcome">欢迎</a></li>
-                <li class="category-item"><a href="#" class="category-link" data-target="content-strengths">我们的优势</a></li>
-            </ul>
-        </div>
-
+        <!-- 侧边栏区域 -->
         <div id="sidebar-about" class="sidebar">
             <h2 class="sidebar-title">关于我们</h2>
             <ul class="category-list">
@@ -628,17 +630,16 @@
             </ul>
         </div>
 
-
+        <!-- 内容展示区 -->
         <div class="content-display">
             
-            <div id="content-welcome" class="content-panel">
+            <!-- 优化：新的首页内容面板 -->
+            <div id="content-home" class="content-panel">
                 <h2 class="section-title">欢迎访问安徽牛锕新材料科技有限公司</h2>
                 <p>安徽牛锕新材料科技有限公司是一家通过ISO质量环境健康三体系认证的高新技术与“专精特新”企业。我们专注于为半导体、光电及新材料行业提供高纯电子材料核心装备与厂务供应系统的研发、设计、生产、测试及安装一体化解决方案。</p>
                 <p>我们的营业项目涵盖半导体/光电厂/材料厂的工艺机台、高纯电子材料核心装备、厂务供应系统，以及高科技厂房无尘室系统、机电系统及机台二次配工程。我们致力于成为泛半导体湿电子化学品高端智能装备系统解决方案的行业领导者。</p>
-            </div>
-            <div id="content-strengths" class="content-panel">
-                <h2 class="section-title">我们的优势</h2>
-                <p>凭借多年的行业深耕，我们积累了强大的技术实力和丰富的项目经验，为客户提供最优质的服务。</p>
+                
+                <h3 style="margin-top: 40px; margin-bottom: 20px; font-size: 1.6rem; color: #333;">我们的核心优势</h3>
                 <ul>
                     <li><b>专业资质：</b>公司拥有建筑机电安装工程专业承包二级资质、承压类特种设备及工业管道安装GC2资质，并通过ISO质量环境健康三体系、CE、SEMI S2等多项国际认证。</li>
                     <li><b>核心技术：</b>作为高新技术企业，我们拥有超过30项半导体设备制造相关的主要专利，不断在技术上创新突破。</li>
@@ -648,6 +649,7 @@
                 </ul>
             </div>
 
+            <!-- 关于我们板块 -->
             <div id="content-about-profile" class="content-panel">
                 <h2 class="section-title">公司简介</h2>
                 <p>安徽牛锕新材料科技有限公司（正微科技）是一家集研发、生产、销售、服务于一体的高科技企业。</p>
@@ -670,11 +672,9 @@
             <div id="content-about-certs" class="content-panel">
                 <h2 class="section-title">企业资质</h2>
                 <p>我们持有全面的行业资质，是您值得信赖的合作伙伴。</p>
+                <!-- 修改点2：只保留第一张图片 -->
                 <div class="products-grid">
                     <div class="product-card"><div class="product-img"><img src="image/zhizhao.png" alt="营业执照"></div><div class="product-info"><h3 class="product-name">营业执照</h3></div></div>
-                    <div class="product-card"><div class="product-img"><img src="https://via.placeholder.com/400x560.png/eee/333?text=ISO三体系认证" alt="ISO三体系认证"></div><div class="product-info"><h3 class="product-name">ISO三体系认证</h3></div></div>
-                    <div class="product-card"><div class="product-img"><img src="https://via.placeholder.com/400x560.png/eee/333?text=GC2压力管道资质" alt="GC2压力管道资质"></div><div class="product-info"><h3 class="product-name">GC2压力管道资质</h3></div></div>
-                    <div class="product-card"><div class="product-img"><img src="https://via.placeholder.com/400x560.png/eee/333?text=机电安装资质" alt="机电安装资质"></div><div class="product-info"><h3 class="product-name">机电安装资质</h3></div></div>
                 </div>
             </div>
             <div id="content-about-value" class="content-panel">
@@ -687,6 +687,7 @@
                 </div>
             </div>
 
+            <!-- 核心产品板块 -->
             <div id="content-products-cds" class="content-panel">
                 <h2 class="section-title">化学品自动供液系统</h2>
                 <p>应用于半导体、太阳能、液晶面板等生产领域，实现化学品的自动、安全、稳定供应。支持HF, HNO3, H2SO4, KOH, H2O2, NH4OH等多种化学品。</p>
@@ -701,9 +702,9 @@
                 <h2 class="section-title">原液输送系统</h2>
                 <p>专为半导体CMP工艺设计，提供高稳定性的研磨液（Slurry）原液输送、在线混配和循环供应解决方案。</p>
                 <div class="products-grid">
-                    <div class="product-card"><div class="product-img"><img src="image/yuanyeshusong.png"></div><div class="product-info"><h3 class="product-name">Slurry原液输送系统</h3><p class="product-desc">采用FM4910认证PVC板材，PTFE气动隔膜泵，在线WetN2保湿。</p></div></div>
-                    <div class="product-card"><div class="product-img"><img src="image/hunpei.png"></div><div class="product-info"><h3 class="product-name">Slurry混配系统</h3><p class="product-desc">配备Levitronix磁悬浮泵、Mettler电子秤、在线Chiller控温和H2O2滴定仪。</p></div></div>
-                    <div class="product-card"><div class="product-img"><img src="image/shusong.png"></div><div class="product-info"><h3 class="product-name">Slurry输送系统</h3><p class="product-desc">集成混配、搅拌、循环、过滤、输送等功能，确保供应点品质稳定。</p></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/yuanyeshusong.png" alt="Slurry原液输送系统"></div><div class="product-info"><h3 class="product-name">Slurry原液输送系统</h3><p class="product-desc">采用FM4910认证PVC板材，PTFE气动隔膜泵，在线WetN2保湿。</p></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/hunpei.png" alt="Slurry混配系统"></div><div class="product-info"><h3 class="product-name">Slurry混配系统</h3><p class="product-desc">配备Levitronix磁悬浮泵、Mettler电子秤、在线Chiller控温和H2O2滴定仪。</p></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/shusong.png" alt="Slurry输送系统"></div><div class="product-info"><h3 class="product-name">Slurry输送系统</h3><p class="product-desc">集成混配、搅拌、循环、过滤、输送等功能，确保供应点品质稳定。</p></div></div>
                 </div>
             </div>
             <div id="content-products-wetbench" class="content-panel">
@@ -734,6 +735,7 @@
                 </div>
             </div>
 
+            <!-- 业绩与案例板块 -->
             <div id="content-cases-performance" class="content-panel">
                 <h2 class="section-title">主要业绩</h2>
                 <p>我们已为众多行业领先客户提供了高质量的设备与服务，以下为部分项目列表。</p>
@@ -769,13 +771,14 @@
             <div id="content-cases-gallery" class="content-panel">
                 <h2 class="section-title">现场案例</h2>
                 <p>我们在全国及海外的多个项目中，展现了卓越的工程实施能力。</p>
+                <!-- 修改点1：移除图片下方空白 -->
                 <div class="products-grid">
-                    <div class="product-card"><div class="product-img"><img src="image/anli1.png" alt="现场案例一"></div><div class="product-info"></div></div>
-                    <div class="product-card"><div class="product-img"><img src="image/anli2.png" alt="现场案例二"></div><div class="product-info"></div></div>
-                    <div class="product-card"><div class="product-img"><img src="image/anli3.png" alt="现场案例三"></div><div class="product-info"></div></div>
-                    <div class="product-card"><div class="product-img"><img src="image/anli4.png" alt="现场案例四"></div><div class="product-info"></div></div>
-                    <div class="product-card"><div class="product-img"><img src="image/anli5.png" alt="现场案例五"></div><div class="product-info"></div></div>
-                    <div class="product-card"><div class="product-img"><img src="image/anli6.png" alt="现场案例六"></div><div class="product-info"></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/anli1.png" alt="客户现场化学品供应系统安装实例"></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/anli2.png" alt="洁净车间内的管道与设备布局"></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/anli3.png" alt="高纯工艺设备现场安装图"></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/anli4.png" alt="厂务供应系统工程案例"></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/anli5.png" alt="大型设备安装调试现场"></div></div>
+                    <div class="product-card"><div class="product-img"><img src="image/anli6.png" alt="二次配工程现场案例"></div></div>
                 </div>
             </div>
             <div id="content-cases-partners" class="content-panel">
@@ -797,6 +800,7 @@
                 </div>
             </div>
 
+            <!-- 联系我们板块 -->
             <div id="content-contact-info" class="content-panel">
                 <h2 class="section-title">联系方式</h2>
                 <p>我们期待与您的合作，欢迎随时通过以下方式联系我们。</p>
@@ -846,14 +850,15 @@
             
             <div class="footer-column">
                 <h3>快速导航</h3>
+                <!-- 优化：为页脚链接添加data属性使其可交互 -->
                 <ul class="footer-links">
-                    <li><a href="#">关于我们</a></li>
-                    <li><a href="#">化学品供应系统(CDS)</a></li>
-                    <li><a href="#">研磨液供应系统(SDS)</a></li>
-                    <li><a href="#">湿法清洗设备</a></li>
-                    <li><a href="#">化学品处理系统</a></li>
-                    <li><a href="#">业绩与案例</a></li>
-                    <li><a href="#">联系我们</a></li>
+                    <li><a data-target="sidebar-about">关于我们</a></li>
+                    <li><a data-target="sidebar-products" data-content="content-products-cds">化学品供应系统(CDS)</a></li>
+                    <li><a data-target="sidebar-products" data-content="content-products-sds">研磨液供应系统(SDS)</a></li>
+                    <li><a data-target="sidebar-products" data-content="content-products-wetbench">湿法清洗设备</a></li>
+                    <li><a data-target="sidebar-products" data-content="content-products-filling">化学品处理系统</a></li>
+                    <li><a data-target="sidebar-cases">业绩与案例</a></li>
+                    <li><a data-target="sidebar-contact">联系我们</a></li>
                 </ul>
             </div>
         </div>
@@ -864,20 +869,31 @@
         </div>
     </footer>
 
+    <!-- 优化：重写交互脚本 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- 选择器 ---
             const navLinks = document.querySelectorAll('.nav-link');
             const sidebars = document.querySelectorAll('.sidebar');
             const contentPanels = document.querySelectorAll('.content-display .content-panel');
             const mainContent = document.querySelector('.main-content');
-            const breadcrumbL1 = document.getElementById('breadcrumb-l1');
-            const breadcrumbL2 = document.getElementById('breadcrumb-l2');
+            const breadcrumbPath = document.getElementById('breadcrumb-path');
+            const consultBtn = document.getElementById('consult-btn');
+            const footerNavLinks = document.querySelectorAll('.footer-links a');
 
+            // --- 1. 面包屑更新函数 ---
             function updateBreadcrumbs(l1Text, l2Text) {
-                breadcrumbL1.textContent = l1Text;
-                breadcrumbL2.textContent = l2Text;
+                if (l1Text && l1Text !== '首页') {
+                    breadcrumbPath.innerHTML = ` &gt; ${l1Text}`;
+                    if (l2Text) {
+                        breadcrumbPath.innerHTML += ` &gt; ${l2Text}`;
+                    }
+                } else {
+                    breadcrumbPath.innerHTML = '';
+                }
             }
 
+            // --- 2. 侧边栏分类链接点击处理器 ---
             mainContent.addEventListener('click', function(event) {
                 const target = event.target.closest('.category-link');
                 if (!target) return;
@@ -887,9 +903,11 @@
                 const parentSidebar = target.closest('.sidebar');
                 if (!parentSidebar) return;
 
+                // 更新侧边栏中的活动状态
                 parentSidebar.querySelectorAll('.category-link').forEach(link => link.classList.remove('active'));
                 target.classList.add('active');
 
+                // 显示对应的内容面板
                 const contentId = target.getAttribute('data-target');
                 const targetContent = document.getElementById(contentId);
                 
@@ -898,48 +916,101 @@
                     targetContent.classList.add('active-content');
                 }
 
+                // 更新面包屑
                 const activeNav = document.querySelector('.nav-link.active');
                 updateBreadcrumbs(activeNav.textContent, target.textContent);
             });
 
+            // --- 3. 主导航链接点击处理器 ---
             navLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
 
+                    // 更新导航链接的活动状态
                     navLinks.forEach(item => item.classList.remove('active'));
                     this.classList.add('active');
 
-                    const sidebarId = this.getAttribute('data-target');
-                    const targetSidebar = document.getElementById(sidebarId);
+                    const targetId = this.getAttribute('data-target');
 
+                    // 先隐藏所有内容面板和侧边栏
+                    contentPanels.forEach(panel => panel.classList.remove('active-content'));
                     sidebars.forEach(bar => bar.classList.remove('active-sidebar'));
-                    if (targetSidebar) {
-                        targetSidebar.classList.add('active-sidebar');
 
-                        const firstCategoryLink = targetSidebar.querySelector('.category-link');
-                        if (firstCategoryLink) {
-                            firstCategoryLink.click();
-                        } else {
-                            contentPanels.forEach(panel => panel.classList.remove('active-content'));
-                            updateBreadcrumbs(this.textContent, '');
+                    if (targetId === 'content-home') { // 首页情况
+                        mainContent.classList.add('no-sidebar');
+                        const homeContent = document.getElementById('content-home');
+                        if (homeContent) {
+                            homeContent.classList.add('active-content');
+                        }
+                        updateBreadcrumbs('首页', '');
+                    } else { // 其他带侧边栏的页面
+                        mainContent.classList.remove('no-sidebar');
+                        const targetSidebar = document.getElementById(targetId);
+                        if (targetSidebar) {
+                            targetSidebar.classList.add('active-sidebar');
+                            // 自动点击侧边栏的第一个链接
+                            const firstCategoryLink = targetSidebar.querySelector('.category-link');
+                            if (firstCategoryLink) {
+                                firstCategoryLink.click();
+                            }
                         }
                     }
                 });
             });
 
-            const initialNavLink = document.querySelector('.nav-link');
-            if(initialNavLink) {
-                initialNavLink.click();
+            // --- 4. "立即咨询" 按钮处理器 ---
+            if (consultBtn) {
+                consultBtn.addEventListener('click', function() {
+                    const contactNavLink = document.querySelector('.nav-link[data-target="sidebar-contact"]');
+                    if (contactNavLink) {
+                        contactNavLink.click();
+                        // 点击后滚动到主内容区域
+                        setTimeout(() => {
+                             mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                });
             }
 
+            // --- 5. 页脚链接处理器 ---
+            footerNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetSidebarId = this.getAttribute('data-target');
+                    const targetContentId = this.getAttribute('data-content');
+
+                    const mainNavLink = document.querySelector(`.nav-link[data-target="${targetSidebarId}"]`);
+                    if (mainNavLink) {
+                        mainNavLink.click();
+                        
+                        // 如果指定了特定的内容面板
+                        if (targetContentId) {
+                            setTimeout(() => {
+                                const subLink = document.querySelector(`.sidebar.active-sidebar .category-link[data-target="${targetContentId}"]`);
+                                if (subLink) {
+                                    subLink.click();
+                                }
+                            }, 50); // 延迟以确保侧边栏已渲染
+                        }
+                        
+                        // 滚动到主内容区域的顶部
+                        const headerHeight = document.querySelector('.main-header').offsetHeight;
+                        const targetOffsetTop = mainContent.offsetTop - headerHeight - 20; // 减去粘性头部高度和一些边距
+                        
+                        window.scrollTo({
+                            top: targetOffsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // --- 6. 初始页面加载 ---
+            const initialNavLink = document.querySelector('.nav-link[data-target="content-home"]');
+            if (initialNavLink) {
+                initialNavLink.click();
+            }
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
